@@ -1,15 +1,24 @@
 {
   "name": "bajaj",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^5.1.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saadhvi-r28/bajaj.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saadhvi-r28/bajaj/issues"
+  },
+  "homepage": "https://github.com/saadhvi-r28/bajaj#readme",
+  "description": ""
 }
