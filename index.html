@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BFHL API Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    input, textarea, button { margin: 0.5em 0; }
+    .output { background: #f4f4f4; padding: 1em; border-radius: 5px; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h1>BFHL API Demo</h1>
+  <form id="bfhl-form">
+    <label>Full Name (lowercase): <input type="text" name="full_name" required></label><br>
+    <label>Date of Birth (ddmmyyyy): <input type="text" name="dob" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>Roll Number: <input type="text" name="roll_number" required></label><br>
+    <label>Data Array (comma separated):<br>
+      <textarea name="data" rows="3" cols="40" required></textarea>
+    </label><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div class="output" id="output"></div>
+  <script>
+    document.getElementById('bfhl-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const dataArr = form.data.value.split(',').map(x => x.trim());
+      const payload = {
+        full_name: form.full_name.value,
+        dob: form.dob.value,
+        email: form.email.value,
+        roll_number: form.roll_number.value,
+        data: dataArr
+      };
+      const outputDiv = document.getElementById('output');
+      outputDiv.textContent = 'Loading...';
+      try {
+        const res = await fetch('/bfhl', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        outputDiv.textContent = JSON.stringify(result, null, 2);
+      } catch (err) {
+        outputDiv.textContent = 'Error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
