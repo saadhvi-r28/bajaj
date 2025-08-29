@@ -4,25 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BFHL API Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 2em; }
-    input, textarea, button { margin: 0.5em 0; }
-    .output { background: #f4f4f4; padding: 1em; border-radius: 5px; margin-top: 1em; }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 500px;
+      margin: 3em auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2em 2.5em;
+    }
+    h1 {
+      text-align: center;
+      color: #3b82f6;
+      margin-bottom: 1em;
+    }
+    label {
+      display: block;
+      margin: 1em 0 0.3em 0;
+      font-weight: 700;
+      color: #374151;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.7em;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 1em;
+      margin-bottom: 0.5em;
+      background: #f1f5f9;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus {
+      border-color: #3b82f6;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 0.8em;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1em;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .output {
+      background: #f1f5f9;
+      padding: 1em;
+      border-radius: 8px;
+      margin-top: 2em;
+      font-size: 1em;
+      color: #334155;
+      white-space: pre-wrap;
+      word-break: break-word;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.08);
+    }
+    .output-title {
+      font-weight: 700;
+      color: #3b82f6;
+      margin-bottom: 0.5em;
+      font-size: 1.1em;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 1em 0.5em;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>BFHL API Demo</h1>
-  <form id="bfhl-form">
-    <label>Full Name (lowercase): <input type="text" name="full_name" required></label><br>
-    <label>Date of Birth (ddmmyyyy): <input type="text" name="dob" required></label><br>
-    <label>Email: <input type="email" name="email" required></label><br>
-    <label>Roll Number: <input type="text" name="roll_number" required></label><br>
-    <label>Data Array (comma separated):<br>
-      <textarea name="data" rows="3" cols="40" required></textarea>
-    </label><br>
-    <button type="submit">Submit</button>
-  </form>
-  <div class="output" id="output"></div>
+  <div class="container">
+    <h1>BFHL API Demo</h1>
+    <form id="bfhl-form">
+      <label>Full Name (lowercase):</label>
+      <input type="text" name="full_name" required placeholder="e.g. john_doe">
+      <label>Date of Birth (ddmmyyyy):</label>
+      <input type="text" name="dob" required placeholder="e.g. 17091999">
+      <label>Email:</label>
+      <input type="email" name="email" required placeholder="e.g. john@xyz.com">
+      <label>Roll Number:</label>
+      <input type="text" name="roll_number" required placeholder="e.g. ABCD123">
+      <label>Data Array (comma separated):</label>
+      <textarea name="data" rows="3" required placeholder="e.g. a,1,334,4,R,$"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="output" id="output" style="display:none;"></div>
+  </div>
   <script>
     document.getElementById('bfhl-form').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -36,7 +117,8 @@
         data: dataArr
       };
       const outputDiv = document.getElementById('output');
-      outputDiv.textContent = 'Loading...';
+      outputDiv.style.display = 'block';
+      outputDiv.innerHTML = '<span class="output-title">Loading...</span>';
       try {
         const res = await fetch('/bfhl', {
           method: 'POST',
@@ -44,9 +126,15 @@
           body: JSON.stringify(payload)
         });
         const result = await res.json();
-        outputDiv.textContent = JSON.stringify(result, null, 2);
+        if (res.ok) {
+          outputDiv.innerHTML = '<span class="output-title">API Response:</span>' +
+            '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+        } else {
+          outputDiv.innerHTML = '<span class="output-title">Error:</span> ' +
+            (result.message ? result.message : 'Unknown error');
+        }
       } catch (err) {
-        outputDiv.textContent = 'Error: ' + err.message;
+        outputDiv.innerHTML = '<span class="output-title">Error:</span> ' + err.message;
       }
     });
   </script>
