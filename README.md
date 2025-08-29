@@ -7,14 +7,14 @@ A REST API built with Node.js and Express that processes input arrays and return
 - **API Endpoint**: [https://bajaj-chi-three.vercel.app/bfhl](https://bajaj-chi-three.vercel.app/bfhl)
 - **Frontend UI**: [https://bajaj-chi-three.vercel.app/](https://bajaj-chi-three.vercel.app/)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Node.js, Express.js
 - **Frontend**: HTML, CSS, JavaScript
 - **Hosting**: Vercel
 - **Version Control**: Git, GitHub
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 bajaj/
@@ -26,7 +26,7 @@ bajaj/
 └── README.md           # Project documentation
 ```
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### POST /bfhl
 
@@ -59,7 +59,7 @@ Processes input data and returns categorized results.
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Using cURL:
 ```bash
@@ -77,7 +77,7 @@ curl -X POST https://bajaj-chi-three.vercel.app/bfhl \
 ### Using the Web Interface:
 Visit [https://bajaj-chi-three.vercel.app/](https://bajaj-chi-three.vercel.app/) and use the form to test the API.
 
-## 🚦 Local Development
+## Local Development
 
 1. **Clone the repository:**
    ```bash
@@ -99,17 +99,17 @@ Visit [https://bajaj-chi-three.vercel.app/](https://bajaj-chi-three.vercel.app/)
    - API: `http://localhost:3000/bfhl`
    - Frontend: `http://localhost:3000/`
 
-## 📦 Deployment
+## Deployment
 
 This project is deployed on Vercel with automatic deployment from GitHub.
 
-## 👨‍💻 Author
+## Author
 
 **Saadhvi Ramachandran**
 - GitHub: [@saadhvi-r28](https://github.com/saadhvi-r28)
 - Project Link: [https://github.com/saadhvi-r28/bajaj](https://github.com/saadhvi-r28/bajaj)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built as part of a coding challenge
 - Deployed on Vercel for reliable hosting
