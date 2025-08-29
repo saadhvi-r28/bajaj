@@ -3,10 +3,9 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-// Friendly message for root URL
-app.get('/', (req, res) => {
-	res.send('Welcome to the BFHL API! Use POST /bfhl to interact with the API.');
-});
+
+// Serve static files from the public folder
+app.use(express.static('public'));
 
 
 // User details can be set via environment variables or request body
