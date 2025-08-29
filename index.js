@@ -1,3 +1,7 @@
+// Friendly message for root URL
+app.get('/', (req, res) => {
+	res.send('Welcome to the BFHL API! Use POST /bfhl to interact with the API.');
+});
 const express = require('express');
 const app = express();
 app.use(express.json());
